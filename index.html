@@ -2,517 +2,85 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إدارة المصروفات</title>
-    <link rel="manifest" href="manifest.json">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>المصروفات الذكية</title>
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#4338ca">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
-        /* Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: system-ui, -apple-system, sans-serif;
-        }
-
-        body {
-            background: #f5f5f5;
-            color: #333;
-            direction: rtl;
-        }
-
-        /* Auth Screen */
-        .auth-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: #fff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .auth-btn {
-            width: 100%;
-            max-width: 300px;
-            padding: 12px;
-            margin: 8px 0;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s;
-        }
-
-        .google-btn {
-            background: #4285f4;
-            color: white;
-        }
-
-        .anon-btn {
-            background: #757575;
-            color: white;
-        }
-
-        /* Main App */
-        .app-container {
-            padding-bottom: 60px;
-        }
-
-        /* Navigation */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            display: flex;
-            justify-content: space-around;
-            padding: 12px;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-        }
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #666;
-            text-decoration: none;
-            font-size: 12px;
-        }
-
-        .nav-item.active {
-            color: #4285f4;
-        }
-
-        /* FAB */
-        .fab {
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: #4285f4;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            border: none;
-            cursor: pointer;
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.5);
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            width: 100%;
-            max-width: 400px;
-        }
-
-        /* Forms */
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-
-        /* Lists */
-        .expense-list {
-            padding: 16px;
-        }
-
-        .expense-item {
-            background: white;
-            padding: 16px;
-            margin-bottom: 8px;
-            border-radius: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* Loading Screen */
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-        }
+        :root { --c-primary: #4f46e5; --c-secondary: #f3f4f6; --c-text-primary: #111827; --c-text-secondary: #6b7280; --c-bg-primary: #ffffff; --c-bg-secondary: #f9fafb; --c-border: #e5e7eb; --c-success: #10b981; --c-danger: #ef4444; --grad-primary: linear-gradient(135deg, #6366f1, #4f46e5); --grad-fab: linear-gradient(45deg, #f43f5e, #f97316); --grad-bg: linear-gradient(135deg, #f9fafb, #e5e7eb); --space-sm: 0.5rem; --space-md: 1rem; --space-lg: 1.5rem; --font-main: 'Cairo', sans-serif; --fs-sm: 0.875rem; --fs-lg: 1.125rem; --fs-2xl: 2rem; --radius-md: 0.75rem; --radius-lg: 1rem; --radius-full: 9999px; --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1); --transition: all 0.3s ease-in-out; }
+        [data-theme="dark"] { --c-primary: #6366f1; --c-secondary: #374151; --c-text-primary: #f9fafb; --c-text-secondary: #9ca3af; --c-bg-primary: #111827; --c-bg-secondary: #1f2937; --c-border: #374151; --grad-bg: linear-gradient(135deg, #1f2937, #111827); }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: var(--font-main); background: var(--grad-bg); color: var(--c-text-primary); }
+        #app-container { max-width: 480px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; background-color: var(--c-bg-primary); position: relative; overflow: hidden; box-shadow: 0 0 40px rgba(0,0,0,0.1); }
+        .screen { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: var(--space-lg); }
+        .hidden { display: none !important; }
+        #main-app { justify-content: flex-start; padding: 0; }
+        .app-header { width: 100%; padding: var(--space-md); display: flex; justify-content: space-between; align-items: center; background-color: color-mix(in srgb, var(--c-bg-primary) 80%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--c-border); z-index: 10; flex-shrink: 0; }
+        #main-content { flex-grow: 1; width: 100%; overflow-y: auto; padding: var(--space-md); }
+        .app-nav { display: grid; grid-template-columns: repeat(5, 1fr); align-items: center; width: 100%; background-color: var(--c-bg-primary); border-top: 1px solid var(--c-border); z-index: 10; box-shadow: 0 -5px 15px -3px rgba(0,0,0,0.05); }
+        .btn, .nav-btn { border: none; cursor: pointer; font-family: inherit; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; gap: var(--space-sm); transition: var(--transition); border-radius: var(--radius-md); }
+        .btn-primary { background: var(--grad-primary); color: #ffffff; box-shadow: var(--shadow-md); padding: var(--space-sm) var(--space-md); }
+        .btn-secondary { background-color: var(--c-secondary); color: var(--c-text-primary); padding: var(--space-sm) var(--space-md); }
+        .btn-danger { background-color: var(--c-danger); color: #ffffff; padding: var(--space-sm) var(--space-md); }
+        .nav-btn { flex-direction: column; gap: .25rem; font-size: var(--fs-sm); color: var(--c-text-secondary); background: transparent; padding: var(--space-sm) 0; height: 100%; }
+        .nav-btn.active { color: var(--c-primary); }
+        .nav-fab { width: 60px; height: 60px; border-radius: var(--radius-full); background: var(--grad-fab); color: #ffffff; box-shadow: var(--shadow-lg); display: flex; align-items: center; justify-content: center; border: 4px solid var(--c-bg-primary); cursor: pointer; transform: translateY(-20px); z-index: 1; }
+        .auth-card { text-align: center; padding: calc(var(--space-lg) * 2); animation: fadeIn .5s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .logo { width: 60px; height: 60px; background: var(--grad-primary); color: #ffffff; border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-md); }
+        .auth-buttons { display: flex; flex-direction: column; gap: var(--space-md); margin-top: var(--space-lg); }
+        .user-profile { display: flex; align-items: center; gap: var(--space-md); }
+        #user-avatar { width: 40px; height: 40px; border-radius: var(--radius-full); object-fit: cover; background-color: var(--c-secondary); border: 2px solid var(--c-primary); }
+        .page { display: flex; flex-direction: column; gap: var(--space-md); animation: fadeIn .5s; width: 100%; }
+        .card { background-color: var(--c-bg-primary); padding: var(--space-md); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 1px solid var(--c-border); }
+        .card h3 { font-size: var(--fs-lg); margin-bottom: var(--space-md); display: flex; align-items: center; gap: var(--space-sm); }
+        .card .amount { font-size: var(--fs-2xl); font-weight: 700; color: var(--c-primary); }
+        .item-list { display: flex; flex-direction: column; gap: var(--space-sm); }
+        .expense-item { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: var(--space-md); padding: var(--space-sm); border-radius: var(--radius-md); border-bottom: 1px solid var(--c-border); }
+        .item-icon { width: 40px; height: 40px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: #ffffff; flex-shrink: 0; }
+        .item-details { overflow: hidden; } .item-name { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } .item-category { font-size: var(--fs-sm); color: var(--c-text-secondary); } .item-amount { font-weight: 700; white-space: nowrap; }
+        .item-actions { display: flex; } .item-actions button { color: var(--c-text-secondary); background: transparent; border: none; padding: .5rem; cursor: pointer; }
+        .category-item { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: var(--space-md); padding: var(--space-sm); border-radius: var(--radius-md); border-bottom: 1px solid var(--c-border); }
+        .modal-backdrop { position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.5); display: none; align-items: center; justify-content: center; z-index: 50; backdrop-filter: blur(4px); opacity: 0; transition: opacity .3s; }
+        .modal-backdrop.active { display: flex; opacity: 1; }
+        .modal { background-color: var(--c-bg-primary); padding: var(--space-lg); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); width: 90%; max-width: 400px; transform: scale(.95); opacity: 0; transition: all .3s; }
+        .modal-backdrop.active .modal { transform: scale(1); opacity: 1; }
+        .modal-actions { display: flex; justify-content: flex-end; gap: var(--space-md); margin-top: var(--space-md); }
+        .form-group { display: flex; flex-direction: column; gap: var(--space-sm); margin-bottom: var(--space-md); }
+        input, select { width: 100%; padding: var(--space-sm) var(--space-md); border: 1px solid var(--c-border); border-radius: var(--radius-md); background-color: var(--c-bg-secondary); font-family: inherit; font-size: var(--fs-base); }
+        input[type="color"] { padding: 2px; height: 40px; }
+        .spinner { width: 40px; height: 40px; border: 4px solid var(--c-secondary); border-top-color: var(--c-primary); border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .empty-state { text-align: center; color: var(--c-text-secondary); padding: calc(var(--space-lg) * 2) 0; }
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div id="loadingScreen" class="loading-screen">
-        جاري التحميل...
+    <div id="app-container">
+        <!-- App content will be rendered here by JavaScript -->
     </div>
+    <div id="modal-container"></div>
+    
+    <!-- Use Firebase Modular SDK (v9+) for better performance -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
+      import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signInAnonymously, signOut } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
+      import { getFirestore, collection, doc, addDoc, getDoc, updateDoc, deleteDoc, onSnapshot, query, where, orderBy, writeBatch, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
+      
+      const firebaseConfig = { apiKey: "AIzaSyCD6TOeIO7g6RGp89YtA1maduwMfyTE1VQ", authDomain: "my-expenses-81714.firebaseapp.com", projectId: "my-expenses-81714", storageBucket: "my-expenses-81714.firebasestorage.app", messagingSenderId: "672207051964", appId: "1:672207051964:web:b6e0cedc143bd06fd584b9" };
 
-    <!-- Auth Screen -->
-    <div id="authScreen" class="auth-screen" style="display: none;">
-        <button class="auth-btn google-btn" onclick="signInWithGoogle()">
-            تسجيل الدخول باستخدام Google
-        </button>
-        <button class="auth-btn anon-btn" onclick="signInAnonymously()">
-            الدخول كزائر
-        </button>
-    </div>
-
-    <!-- Main App -->
-    <div id="appContainer" class="app-container" style="display: none;">
-        <!-- Daily View -->
-        <div id="dailyView" class="view">
-            <h2 style="padding: 16px;">مصروفات اليوم</h2>
-            <div id="dailyExpensesList" class="expense-list"></div>
-        </div>
-
-        <!-- Monthly View -->
-        <div id="monthlyView" class="view" style="display: none;">
-            <h2 style="padding: 16px;">مصروفات الشهر</h2>
-            <div id="monthlyTotal"></div>
-            <div id="monthlyExpensesList" class="expense-list"></div>
-        </div>
-
-        <!-- Categories View -->
-        <div id="categoriesView" class="view" style="display: none;">
-            <h2 style="padding: 16px;">الفئات</h2>
-            <div id="categoriesList" class="expense-list"></div>
-            <button class="auth-btn google-btn" onclick="showAddCategoryModal()">
-                إضافة فئة جديدة
-            </button>
-        </div>
-
-        <!-- Bottom Navigation -->
-        <nav class="bottom-nav">
-            <a href="#" class="nav-item active" onclick="switchView('daily')">
-                <span class="material-icons">today</span>
-                يومي
-            </a>
-            <a href="#" class="nav-item" onclick="switchView('monthly')">
-                <span class="material-icons">calendar_month</span>
-                شهري
-            </a>
-            <a href="#" class="nav-item" onclick="switchView('categories')">
-                <span class="material-icons">category</span>
-                فئات
-            </a>
-            <a href="#" class="nav-item" onclick="signOut()">
-                <span class="material-icons">logout</span>
-                خروج
-            </a>
-        </nav>
-
-        <!-- FAB -->
-        <button class="fab" onclick="showAddExpenseModal()">
-            <span class="material-icons">add</span>
-        </button>
-    </div>
-
-    <!-- Add Expense Modal -->
-    <div id="addExpenseModal" class="modal">
-        <div class="modal-content">
-            <h3>إضافة مصروف جديد</h3>
-            <div class="form-group">
-                <label>الاسم</label>
-                <input type="text" id="expenseName">
-            </div>
-            <div class="form-group">
-                <label>المبلغ</label>
-                <input type="number" id="expenseAmount">
-            </div>
-            <div class="form-group">
-                <label>الفئة</label>
-                <select id="expenseCategory"></select>
-            </div>
-            <button class="auth-btn google-btn" onclick="addExpense()">إضافة</button>
-            <button class="auth-btn anon-btn" onclick="hideAddExpenseModal()">إلغاء</button>
-        </div>
-    </div>
-
-    <!-- Add Category Modal -->
-    <div id="addCategoryModal" class="modal">
-        <div class="modal-content">
-            <h3>إضافة فئة جديدة</h3>
-            <div class="form-group">
-                <label>اسم الفئة</label>
-                <input type="text" id="categoryName">
-            </div>
-            <div class="form-group">
-                <label>اللون</label>
-                <input type="color" id="categoryColor">
-            </div>
-            <button class="auth-btn google-btn" onclick="addCategory()">إضافة</button>
-            <button class="auth-btn anon-btn" onclick="hideAddCategoryModal()">إلغاء</button>
-        </div>
-    </div>
-
-    <!-- Firebase Scripts -->
-    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-firestore-compat.js"></script>
-
-    <script>
-        // Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyCD6TOeIO7g6RGp89YtA1maduwMfyTE1VQ",
-            authDomain: "my-expenses-81714.firebaseapp.com",
-            projectId: "my-expenses-81714",
-            storageBucket: "my-expenses-81714.firebasestorage.app",
-            messagingSenderId: "672207051964",
-            appId: "1:672207051964:web:b6e0cedc143bd06fd584b9",
-            measurementId: "G-YBTY3QD4YQ"
-        };
-
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const db = firebase.firestore();
-
-        // Auth State Observer
-        auth.onAuthStateChanged((user) => {
-            document.getElementById('loadingScreen').style.display = 'none';
-            if (user) {
-                document.getElementById('authScreen').style.display = 'none';
-                document.getElementById('appContainer').style.display = 'block';
-                loadData();
-            } else {
-                document.getElementById('authScreen').style.display = 'flex';
-                document.getElementById('appContainer').style.display = 'none';
-            }
-        });
-
-        // Auth Functions
-        function signInWithGoogle() {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            auth.signInWithPopup(provider);
-        }
-
-        function signInAnonymously() {
-            auth.signInAnonymously();
-        }
-
-        function signOut() {
-            auth.signOut();
-        }
-
-        // View Management
-        function switchView(view) {
-            document.querySelectorAll('.view').forEach(v => v.style.display = 'none');
-            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-            
-            document.getElementById(`${view}View`).style.display = 'block';
-            event.currentTarget.classList.add('active');
-        }
-
-        // Modal Management
-        function showAddExpenseModal() {
-            document.getElementById('addExpenseModal').style.display = 'flex';
-        }
-
-        function hideAddExpenseModal() {
-            document.getElementById('addExpenseModal').style.display = 'none';
-        }
-
-        function showAddCategoryModal() {
-            document.getElementById('addCategoryModal').style.display = 'flex';
-        }
-
-        function hideAddCategoryModal() {
-            document.getElementById('addCategoryModal').style.display = 'none';
-        }
-
-        // Data Management
-        async function loadData() {
-            await loadCategories();
-            await loadDailyExpenses();
-            await loadMonthlyExpenses();
-        }
-
-        async function loadCategories() {
-            const snapshot = await db.collection('categories')
-                .where('userId', '==', auth.currentUser.uid)
-                .get();
-            
-            const categoriesList = document.getElementById('categoriesList');
-            const categorySelect = document.getElementById('expenseCategory');
-            
-            categoriesList.innerHTML = '';
-            categorySelect.innerHTML = '';
-            
-            snapshot.forEach(doc => {
-                const category = doc.data();
-                
-                // Add to categories list
-                categoriesList.innerHTML += `
-                    <div class="expense-item">
-                        <span style="color: ${category.color}">${category.name}</span>
-                        <button onclick="deleteCategory('${doc.id}')">حذف</button>
-                    </div>
-                `;
-                
-                // Add to select dropdown
-                categorySelect.innerHTML += `
-                    <option value="${doc.id}">${category.name}</option>
-                `;
-            });
-        }
-
-        async function loadDailyExpenses() {
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-            
-            const snapshot = await db.collection('expenses')
-                .where('userId', '==', auth.currentUser.uid)
-                .where('date', '>=', today)
-                .get();
-            
-            const expensesList = document.getElementById('dailyExpensesList');
-            expensesList.innerHTML = '';
-            
-            let total = 0;
-            
-            snapshot.forEach(doc => {
-                const expense = doc.data();
-                total += expense.amount;
-                
-                expensesList.innerHTML += `
-                    <div class="expense-item">
-                        <div>
-                            <strong>${expense.name}</strong>
-                            <div>${expense.amount} ريال</div>
-                        </div>
-                        <button onclick="deleteExpense('${doc.id}')">حذف</button>
-                    </div>
-                `;
-            });
-            
-            expensesList.innerHTML = `
-                <div class="expense-item" style="background: #4285f4; color: white;">
-                    <strong>إجمالي اليوم</strong>
-                    <div>${total} ريال</div>
-                </div>
-            ` + expensesList.innerHTML;
-        }
-
-        async function loadMonthlyExpenses() {
-            const firstDay = new Date();
-            firstDay.setDate(1);
-            firstDay.setHours(0, 0, 0, 0);
-            
-            const snapshot = await db.collection('expenses')
-                .where('userId', '==', auth.currentUser.uid)
-                .where('date', '>=', firstDay)
-                .get();
-            
-            const monthlyTotal = document.getElementById('monthlyTotal');
-            let total = 0;
-            
-            snapshot.forEach(doc => {
-                const expense = doc.data();
-                total += expense.amount;
-            });
-            
-            monthlyTotal.innerHTML = `
-                <div class="expense-item" style="background: #4285f4; color: white;">
-                    <strong>إجمالي الشهر</strong>
-                    <div>${total} ريال</div>
-                </div>
-            `;
-        }
-
-        async function addExpense() {
-            const name = document.getElementById('expenseName').value;
-            const amount = Number(document.getElementById('expenseAmount').value);
-            const categoryId = document.getElementById('expenseCategory').value;
-            
-            if (!name || !amount || !categoryId) {
-                alert('الرجاء ملء جميع الحقول');
-                return;
-            }
-            
-            await db.collection('expenses').add({
-                userId: auth.currentUser.uid,
-                name,
-                amount,
-                categoryId,
-                date: new Date()
-            });
-            
-            hideAddExpenseModal();
-            loadData();
-        }
-
-        async function addCategory() {
-            const name = document.getElementById('categoryName').value;
-            const color = document.getElementById('categoryColor').value;
-            
-            if (!name || !color) {
-                alert('الرجاء ملء جميع الحقول');
-                return;
-            }
-            
-            await db.collection('categories').add({
-                userId: auth.currentUser.uid,
-                name,
-                color
-            });
-            
-            hideAddCategoryModal();
-            loadData();
-        }
-
-        async function deleteExpense(id) {
-            await db.collection('expenses').doc(id).delete();
-            loadData();
-        }
-
-        async function deleteCategory(id) {
-            await db.collection('categories').doc(id).delete();
-            loadData();
-        }
-
-        // Service Worker Registration
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js');
-            });
-        }
+      // Make all functions and variables available to the main app script
+      window.firebaseServices = {
+        initializeApp, getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signInAnonymously, signOut,
+        getFirestore, collection, doc, addDoc, getDoc, updateDoc, deleteDoc, onSnapshot, query, where, orderBy, writeBatch, serverTimestamp,
+        firebaseConfig
+      };
     </script>
+    
+    <script type="module" src="./app.js"></script>
+    <script>if ('serviceWorker' in navigator) { window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js')); }</script>
 </body>
 </html>
