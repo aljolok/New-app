@@ -1,0 +1,354 @@
+/* الألوان والمتغيرات الأساسية */
+:root {
+    --background-color: #f4f6f8;
+    --primary-color: #4a90e2;
+    --accent-color: #50e3c2;
+    --text-color: #333;
+    --card-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+    --border-radius: 16px;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    direction: rtl; /* لتحديد اتجاه النص من اليمين إلى اليسار */
+    text-align: right; /* لمحاذاة النص إلى اليمين */
+}
+
+/* التخطيط العام */
+#app-container {
+    max-width: 600px; /* للتركيز على الجوال أولاً */
+    margin: 0 auto;
+    background-color: #fff;
+    min-height: 100vh;
+    box-shadow: var(--card-shadow);
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--card-shadow);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+/* شريط التنقل السفلي والـ FAB */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.08);
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+    padding: 0.5rem 0;
+    z-index: 1000; /* للتأكد من أنها فوق المحتوى */
+}
+
+.bottom-nav ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.bottom-nav li {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.bottom-nav button {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    padding: 0.8rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.bottom-nav button:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+
+.bottom-nav button.active {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.fab-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* لجعلها تتوسط الحافة المنحنية لاحقًا */
+    transform: translateY(-50%); /* يرفع الـ FAB نصف ارتفاعه */
+    position: relative; /* لتمكين التحكم في موضعها */
+    z-index: 1001; /* فوق شريط التنقل */
+}
+
+.fab {
+    background-color: var(--accent-color);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: var(--card-shadow);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    outline: none;
+}
+
+.fab:hover {
+    transform: translateY(-55%) scale(1.05);
+    box-shadow: 0px 6px 16px rgba(0,0,0,0.15);
+}
+
+/* الأزرار العامة */
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: var(--card-shadow);
+}
+
+button:hover {
+    background-color: #3a7bd5; /* درجة أغمق من الأساسي */
+    box-shadow: 0px 6px 16px rgba(0,0,0,0.15);
+}
+
+button#anonymous-signin-btn {
+    background-color: #6c757d; /* لون رمادي لزر المجهول */
+}
+button#anonymous-signin-btn:hover {
+    background-color: #5a6268;
+}
+
+/* شاشة المصادقة */
+#auth-screen {
+    text-align: center;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 4rem); /* تقليل الارتفاع ليتناسب مع padding */
+}
+
+#auth-screen button {
+    margin: 0.5rem 0;
+    width: 80%; /* لتكون الأزرار أوسع قليلاً */
+    max-width: 300px;
+}
+
+/* شاشة التطبيق الرئيسية */
+#main-app-screen {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#content-area {
+    flex-grow: 1;
+    padding: 1rem;
+    overflow-y: auto; /* للسماح بالتمرير داخل منطقة المحتوى */
+}
+
+section {
+    background-color: #fff;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+}
+
+h2 {
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background-color: var(--background-color);
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+}
+
+/* الأشكال المدخلة */
+input[type="text"],
+input[type="number"],
+input[type="color"],
+select {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box; /* لضمان أن العرض يشمل ال padding */
+}
+
+input[type="color"] {
+    height: 40px;
+    padding: 5px;
+}
+
+form button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+}
+
+/* المودال (النافذة المنبثقة) */
+.modal {
+    position: fixed;
+    z-index: 1002; /* أعلى من الـ FAB */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0; /* للتحكم في الانتقال */
+    visibility: hidden; /* للتحكم في الانتقال */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    transform: translateY(20px); /* للتحكم في الانتقال */
+    transition: transform 0.3s ease;
+}
+
+.modal.show .modal-content {
+    transform: translateY(0);
+}
+
+.modal-content h2 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.close-button {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    left: 15px; /* ليكون على اليسار مع النص العربي */
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: var(--text-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* منتقي التاريخ (spinner) */
+.date-spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--background-color);
+    border-radius: 8px;
+    padding: 8px 10px;
+    margin-bottom: 1rem;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.date-spinner .date-arrow {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    padding: 0 10px;
+    transition: color 0.2s ease;
+}
+
+.date-spinner .date-arrow:hover {
+    color: var(--accent-color);
+}
+
+#display-date {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--text-color);
+    transition: opacity 0.2s ease; /* للانتقال السلس */
+}
+
+/* حالة التحميل */
+#loading-spinner {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+}
+
+/* تصميم تجاوبي أساسي */
+@media (min-width: 768px) {
+    .bottom-nav {
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 600px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+}
+
